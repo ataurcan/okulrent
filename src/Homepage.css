@@ -1,0 +1,11 @@
+.homepage {
+  flex: 0.8;
+  height: 150vh;
+  color: white;
+
+  background: linear-gradient(orange, pink);
+}
+.h1 {
+  font-size: 999;
+  color: white;
+}
