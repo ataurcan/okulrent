@@ -2,7 +2,7 @@ import "./App.css";
 import Homepage from "./Homepage.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./Login";
-import Header from "./Header";
+import Signup from "./Signup";
 import Rentpage from "./Rentpage";
 
 function App() {
@@ -10,6 +10,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/Signup">
+            <Signup></Signup>
+          </Route>
+
           <Route path="/Login">
             <Login></Login>
           </Route>
