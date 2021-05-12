@@ -1,8 +1,33 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Header from "./Header";
+import firebase from "./firebase";
+import react, { useState } from "react";
 function Login() {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const handleOnChange = (e) => {
+    setemail(e.target.value);
+  };
+  const handleOnChange2 = (e) => {
+    setpassword(e.target.value);
+  };
+  const signin = (e, p) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+  };
+
   return (
     <div className="login">
       <Header></Header>
@@ -13,12 +38,16 @@ function Login() {
         />
         <form>
           <div className="txt_field">
-            <input type="text" />
+            <input type="text" onChange={handleOnChange} value={email} />
             <span></span>
             <label>Username</label>
           </div>
           <div className="txt_field">
-            <input type="password" />
+            <input
+              type="password"
+              onChange={handleOnChange2}
+              value={password}
+            />
             <span></span>
             <label>Password</label>
           </div>
@@ -27,7 +56,9 @@ function Login() {
             <div className="signup_link">Not a member? - Sign-up</div>
           </Link>
           <Link to="/rentacar">
-            <button className="button_sign">Sign In</button>
+            <button onClick={signin(email, password)} className="button_sign">
+              Sign In
+            </button>
           </Link>
         </form>
       </div>

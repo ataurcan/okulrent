@@ -1,8 +1,34 @@
-import React from "react";
 import "./Signup.css";
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import firebase from "./firebase";
 function Signup() {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const handleOnChange = (e) => {
+    setemail(e.target.value);
+  };
+  const handleOnChange2 = (e) => {
+    setpassword(e.target.value);
+  };
+
+  const sign = (e, p) => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(e, p)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log("bravo hıyar girdin");
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ..
+      });
+  };
   return (
     <div className="signup">
       <Header></Header>
@@ -13,22 +39,24 @@ function Signup() {
         />
         <form>
           <div className="txt_field">
-            <input type="text" />
+            <input type="text" onChange={handleOnChange} value={email} />
             <span></span>
-            <label>Username</label>
+            <label>E-mail</label>
           </div>
           <div className="txt_field">
-            <input type="password" />
+            <input
+              type="password"
+              onChange={handleOnChange2}
+              value={password}
+            />
             <span></span>
             <label>Password</label>
           </div>
-          <div className="txt_field">
-            <input type="password" />
-            <span></span>
-            <label>Password</label>
-          </div>
+
           <Link to="/Login">
-            <button className="button_signup">Sign Up</button>
+            <button className="button_signup" onClick={sign(email, password)}>
+              Sign Up
+            </button>
           </Link>
         </form>
       </div>
