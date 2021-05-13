@@ -1,24 +1,19 @@
-const Search = () => {
-  return (
-    <FirebaseDatabaseNode path="https://rentacar-4c1a7-default-rtdb.firebaseio.com/">
-      {(data) => {
-        const { value } = data;
-        if (value === null || typeof value === "undefined") return null;
-        const keys = Object.keys(value);
-        const values = Object.values(value);
-        const valuesWithKeys = values.map((value, i) => ({
-          capacity: value.capacity,
-          carDescr: value.carDescr,
-          gearType: value.gearType,
-          imageURL: value.imageURL,
-          price: value.price,
-          model: value.model,
-          vehicleClass: value.vehicleClass,
+import firebase from "./firebase";
+const retrieveInfo = () => {
+  const dbRef = firebase.database().ref();
+  dbRef
 
-          id: keys[i],
-        }));
-        return <AutoComplete items={valuesWithKeys} />;
-      }}
-    </FirebaseDatabaseNode>
-  );
+    .get()
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
+
+export default retrieveInfo;

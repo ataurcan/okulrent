@@ -1,13 +1,16 @@
 import React from "react";
 import "./Rentpage.css";
 import Header from "./Header";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Grid from "@material-ui/core/Grid";
+import "./carData";
+import retrieveInfo from "./carData";
+
+import firebase from "./firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +27,16 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
   },
 }));
+retrieveInfo();
 function Rentpage() {
   const classes = useStyles();
+
+  //DATABASE
 
   return (
     <div className="rentpage">
       <Header />
+
       <div>
         <h1 className="title">RENT YOUR CAR</h1>
         <hr></hr>
@@ -50,6 +57,7 @@ function Rentpage() {
           </IconButton>
         </Paper>
       </Grid>
+      <div className="infosResults"></div>
     </div>
   );
 }
