@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Header from "./Header";
-import firebase from "./firebase";
+import firebaseDB from "./firebase";
 import react, { useState } from "react";
 function Login() {
   const [email, setemail] = useState("");
@@ -13,7 +13,7 @@ function Login() {
     setpassword(e.target.value);
   };
   const signin = (e, p) => {
-    firebase
+    firebaseDB
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {

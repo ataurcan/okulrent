@@ -3,7 +3,7 @@ import Homepage from "./Homepage.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
-import Rentpage from "./Rentpage";
+import Rentpage from "./Rentpage2";
 
 function App() {
   return (

@@ -1,15 +1,12 @@
-import firebase from "./firebase";
-const retrieveInfo = () => {
-  const dbRef = firebase.database().ref();
-  dbRef
+import firebaseDB from "./firebase";
 
+const retrieveInfo = () => {
+  const dbRef = firebaseDB.database().ref();
+  dbRef
     .get()
     .then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log(snapshot.val());
-      } else {
-        console.log("No data available");
-      }
+      const model = snapshot.child("cars").val();
+      console.log(model);
     })
     .catch((error) => {
       console.error(error);

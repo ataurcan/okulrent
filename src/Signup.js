@@ -2,7 +2,7 @@ import "./Signup.css";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import firebase from "./firebase";
+import firebaseDB from "./firebase";
 function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -14,7 +14,7 @@ function Signup() {
   };
 
   const sign = (e, p) => {
-    firebase
+    firebaseDB
       .auth()
       .createUserWithEmailAndPassword(e, p)
       .then((userCredential) => {
