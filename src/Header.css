@@ -32,3 +32,13 @@
   cursor: pointer;
   transition: 200ms color ease-in;
 }
+
+.header_right_2:hover {
+  color: white;
+}
+.header_right_2 {
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: 200ms color ease-in;
+}

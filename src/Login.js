@@ -12,21 +12,11 @@ function Login() {
   const handleOnChange2 = (e) => {
     setpassword(e.target.value);
   };
-  const signin = (e, p) => {
-    firebaseDB
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Signed in
-        var user = userCredential.user;
+  var user;
 
-        // ...
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-      });
-  };
+  function signIn() {
+    firebaseDB.auth.signIn();
+  }
 
   return (
     <div className="login">
@@ -56,7 +46,7 @@ function Login() {
             <div className="signup_link">Not a member? - Sign-up</div>
           </Link>
           <Link to="/rentacar">
-            <button onClick={signin(email, password)} className="button_sign">
+            <button onClick={signIn} className="button_sign">
               Sign In
             </button>
           </Link>

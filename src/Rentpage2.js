@@ -12,6 +12,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CardHeader from "@material-ui/core/CardHeader";
+import "./Login";
 
 const useStyles = makeStyles({
   root: {
@@ -27,6 +28,20 @@ const useStyles = makeStyles({
 
 function CarCard({ model, image, description, price, city, type }) {
   const classes = useStyles();
+
+  function checkUser() {
+    firebaseDB.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        console.log("başarılı");
+        alert("Lütfen Ödemeyi Yapınız \n IBAN");
+      } else {
+        // No user is signed in.
+        console.log("başarısız");
+        alert("You must sign in first!");
+      }
+    });
+  }
 
   return (
     <div>
@@ -49,7 +64,7 @@ function CarCard({ model, image, description, price, city, type }) {
         </CardActionArea>
         <Grid container justify="center" alignItems="flex-end">
           <CardActions>
-            <Button size="small" color="primary">
+            <Button onClick={checkUser} size="small" color="primary">
               rent
             </Button>
             <Typography

@@ -23,7 +23,7 @@ function Homepage() {
             and Las Venturas.<br></br>
             <h3 className="p_title"> OUR CONTACT INFORMATION</h3>
             <p className="info">
-              Los Santos Responsible: Sadetting Ege Tuncel vagos_sado@gmail.com
+              Los Santos Responsible: Sadettin Ege Tuncel vagos_sado@gmail.com
               <br></br> San Fierro Responsible: Ata Urcan
               ataurcan@sanfierro.com.us<br></br> Las Venturas Responsible:
               Furkan Kucuk smaLL_fruko@gmail.com

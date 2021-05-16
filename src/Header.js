@@ -1,7 +1,14 @@
 import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import "./Login.js";
+import firebaseDB from "firebase";
 function Header() {
+  var user = firebaseDB.auth().currentUser;
+  var div1 = user ? "Log Out" : "Sign In";
+  function logout() {
+    firebaseDB.auth.signOut();
+  }
   return (
     <div className="header">
       <div className="header_logo">
@@ -19,7 +26,9 @@ function Header() {
           <span className="header_right_1">Rent a car</span>
         </Link>
         <Link to="/Login" style={{ textDecoration: "none", color: "black" }}>
-          <span className="header_right_1"> Sign In</span>
+          <span onClick={logout} className="header_right_2">
+            {div1}
+          </span>
         </Link>
       </div>
     </div>
