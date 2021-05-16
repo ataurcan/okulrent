@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Rentpage.css";
 import Header from "./Header";
 import Grid from "@material-ui/core/Grid";
-import firebaseDB from "./firebase";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -13,6 +13,8 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CardHeader from "@material-ui/core/CardHeader";
 import "./Login";
+import { firebaseDB, auth } from "./firebase";
+import { useStateValue } from "./StateProvider";
 
 const useStyles = makeStyles({
   root: {
@@ -27,20 +29,29 @@ const useStyles = makeStyles({
 });
 
 function CarCard({ model, image, description, price, city, type }) {
-  const classes = useStyles();
 
-  function checkUser() {
-    firebaseDB.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        console.log("başarılı");
-        alert("Lütfen Ödemeyi Yapınız \n IBAN");
-      } else {
-        // No user is signed in.
-        console.log("başarısız");
-        alert("You must sign in first!");
-      }
-    });
+  const classes = useStyles();
+  const [{ user, basket }, dispatch] = useStateValue();
+  
+  const handleAuthenticaton = () => {
+    if (user) {
+      dispatch({
+        type: "ADD_TO_BASKET",
+        item: {
+          model: model,
+          image: image,
+          description: description,
+          price: price,
+          city: city,
+          type: type,
+        },
+      });
+   
+      alert("Lütfen Ödemeyi Yapınız \n IBAN")
+    }
+    else {
+      alert("You must sign in first!");
+    }
   }
 
   return (
@@ -64,8 +75,8 @@ function CarCard({ model, image, description, price, city, type }) {
         </CardActionArea>
         <Grid container justify="center" alignItems="flex-end">
           <CardActions>
-            <Button onClick={checkUser} size="small" color="primary">
-              rent
+            <Button onClick={handleAuthenticaton} size="small" color="primary">
+              Add to Basket
             </Button>
             <Typography
               className={classes.price}
@@ -84,6 +95,7 @@ function CarCard({ model, image, description, price, city, type }) {
 
 function Rentpage() {
   const [carList, setCarList] = useState();
+  
 
   useEffect(() => {
     const carRef = firebaseDB.database().ref("cars");
@@ -96,6 +108,7 @@ function Rentpage() {
       setCarList(carList);
     });
   }, []);
+
   return (
     <div className="rentpage">
       <Header />

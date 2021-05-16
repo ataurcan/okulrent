@@ -2,6 +2,7 @@ import React from "react";
 import "./Homepage.css";
 import Header from "./Header";
 import cars from "./img/cars.png";
+
 function Homepage() {
   return (
     <div className="homepage">

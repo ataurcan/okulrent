@@ -2,13 +2,19 @@ import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import "./Login.js";
-import firebaseDB from "firebase";
+import { useStateValue } from "./StateProvider";
+import { auth } from "./firebase";
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+
 function Header() {
-  var user = firebaseDB.auth().currentUser;
-  var div1 = user ? "Log Out" : "Sign In";
-  function logout() {
-    firebaseDB.auth.signOut();
+  const [{ user, basket }, dispatch] = useStateValue();
+  
+  const handleAuthenticaton = () => {
+    if (user) {
+      auth.signOut();
+    }
   }
+
   return (
     <div className="header">
       <div className="header_logo">
@@ -26,9 +32,11 @@ function Header() {
           <span className="header_right_1">Rent a car</span>
         </Link>
         <Link to="/Login" style={{ textDecoration: "none", color: "black" }}>
-          <span onClick={logout} className="header_right_2">
-            {div1}
-          </span>
+          <span onClick = {handleAuthenticaton} className="header_right_2">{user ? "Sign Out" : "Sign In"}</span>
+        </Link>
+        <Link to="/Basket" style={{ textDecoration: "none", color: "black" }}>
+        <ShoppingBasketIcon></ShoppingBasketIcon>
+        <span className="basketCount">{basket?.length}</span>
         </Link>
       </div>
     </div>

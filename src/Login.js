@@ -1,21 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 import Header from "./Header";
-import firebaseDB from "./firebase";
+import { firebaseDB, auth} from "./firebase";
 import react, { useState } from "react";
 function Login() {
+  const history = useHistory();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const handleOnChange = (e) => {
-    setemail(e.target.value);
-  };
-  const handleOnChange2 = (e) => {
-    setpassword(e.target.value);
-  };
-  var user;
+  
+  
 
-  function signIn() {
-    firebaseDB.auth.signIn();
+  const signIn = e => {
+    e.preventDefault();
+
+    auth
+    .signInWithEmailAndPassword(email, password)
+    .then(auth => {
+    
+      history.push("/Rentacar")
+    
+    })
+    .catch(error => alert(error.message))
   }
 
   return (
@@ -28,28 +33,28 @@ function Login() {
         />
         <form>
           <div className="txt_field">
-            <input type="text" onChange={handleOnChange} value={email} />
+            <input type="text" value={email} onChange={e => setemail(e.target.value)} />
             <span></span>
-            <label>Username</label>
+            <label>E-mail</label>
           </div>
           <div className="txt_field">
             <input
               type="password"
-              onChange={handleOnChange2}
+              onChange={e => setpassword(e.target.value)}
               value={password}
             />
             <span></span>
             <label>Password</label>
           </div>
-          <div className="pass">Forgot Password?</div>
+          
           <Link to="/Signup">
             <div className="signup_link">Not a member? - Sign-up</div>
           </Link>
-          <Link to="/rentacar">
+            
             <button onClick={signIn} className="button_sign">
               Sign In
             </button>
-          </Link>
+          
         </form>
       </div>
     </div>

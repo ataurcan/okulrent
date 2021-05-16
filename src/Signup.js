@@ -1,33 +1,34 @@
 import "./Signup.css";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
-import firebaseDB from "./firebase";
+import { firebaseDB, auth }  from "./firebase";
+import userEvent from "@testing-library/user-event";
+
 function Signup() {
+  const history = useHistory();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const handleOnChange = (e) => {
-    setemail(e.target.value);
-  };
-  const handleOnChange2 = (e) => {
-    setpassword(e.target.value);
-  };
+  
 
-  const sign = (e, p) => {
-    firebaseDB
-      .auth()
-      .createUserWithEmailAndPassword(e, p)
-      .then((userCredential) => {
+  const signUp = (e) => {
+    e.preventDefault();
+    
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
         // Signed in
-        var user = userCredential.user;
-        console.log("bravo hıyar girdin");
+        
+        console.log(auth);
+        if (auth) {
+          history.push("/Login")  
+        }
         // ...
       })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+      .catch((error) => alert(error.message))
+        
         // ..
-      });
+      
   };
   return (
     <div className="signup">
@@ -39,25 +40,25 @@ function Signup() {
         />
         <form>
           <div className="txt_field">
-            <input type="text" onChange={handleOnChange} value={email} />
+            <input type="text" value={email} onChange={e => setemail(e.target.value)} />
             <span></span>
             <label>E-mail</label>
           </div>
           <div className="txt_field">
             <input
               type="password"
-              onChange={handleOnChange2}
               value={password}
+              onChange={e => setpassword(e.target.value)}
             />
             <span></span>
             <label>Password</label>
           </div>
 
-          <Link to="/Login">
-            <button className="button_signup" onClick={sign(email, password)}>
+          
+            <button className="button_signup" onClick={signUp}>
               Sign Up
             </button>
-          </Link>
+          
         </form>
       </div>
     </div>
