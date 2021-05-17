@@ -13,24 +13,22 @@ function App() {
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
-    auth.onAuthStateChanged(authUser => {
+    auth.onAuthStateChanged((authUser) => {
       console.log("the user is >>> ", authUser);
 
-      if (authUser){
-
+      if (authUser) {
         dispatch({
           type: "SET_USER",
-          user: authUser
-        })
-
+          user: authUser,
+        });
       } else {
         dispatch({
           type: "SET_USER",
-          user: null
-        })
+          user: null,
+        });
       }
-    })
-  },[])
+    });
+  }, []);
   return (
     <Router>
       <div className="App">
@@ -51,7 +49,6 @@ function App() {
           <Route path="/">
             <Homepage></Homepage>
           </Route>
-          
         </Switch>
       </div>
     </Router>
