@@ -4,6 +4,7 @@ import Header from "./Header";
 import { firebaseDB, auth} from "./firebase";
 import react, { useState } from "react";
 function Login() {
+  
   const history = useHistory();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -33,13 +34,13 @@ function Login() {
         />
         <form>
           <div className="txt_field">
-            <input type="text" value={email} onChange={e => setemail(e.target.value)} />
+            <input type="text" required value={email} onChange={e => setemail(e.target.value)} />
             <span></span>
             <label>E-mail</label>
           </div>
           <div className="txt_field">
             <input
-              type="password"
+              type="password" required
               onChange={e => setpassword(e.target.value)}
               value={password}
             />
@@ -47,7 +48,7 @@ function Login() {
             <label>Password</label>
           </div>
           
-          <Link to="/Signup">
+          <Link to="/Signup" style={{ textDecoration: "none", color: "black"}} >
             <div className="signup_link">Not a member? - Sign-up</div>
           </Link>
             

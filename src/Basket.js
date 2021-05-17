@@ -3,7 +3,7 @@ import Header from "./Header";
 import "./Basket.css";
 import Total from "./Total";
 import Basketcar from "./Basketcar"
-import { firebaseDB, auth } from "./firebase";
+
 import { useStateValue } from "./StateProvider";
 
 function Basket() {

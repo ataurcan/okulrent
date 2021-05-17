@@ -9,11 +9,12 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 function Header() {
   const [{ user, basket }, dispatch] = useStateValue();
   
-  const handleAuthenticaton = () => {
+  const handleAuthenticationOut = () => {
     if (user) {
       auth.signOut();
     }
-  }
+ }
+
 
   return (
     <div className="header">
@@ -32,7 +33,7 @@ function Header() {
           <span className="header_right_1">Rent a car</span>
         </Link>
         <Link to="/Login" style={{ textDecoration: "none", color: "black" }}>
-          <span onClick = {handleAuthenticaton} className="header_right_2">{user ? "Sign Out" : "Sign In"}</span>
+          <span onClick = {handleAuthenticationOut} className="header_right_2">{user ? "Sign Out" : "Sign In"}</span>
         </Link>
         <Link to="/Basket" style={{ textDecoration: "none", color: "black" }}>
         <ShoppingBasketIcon></ShoppingBasketIcon>

@@ -3,7 +3,7 @@ import Header from "./Header";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import { firebaseDB, auth }  from "./firebase";
-import userEvent from "@testing-library/user-event";
+
 
 function Signup() {
   const history = useHistory();
@@ -40,13 +40,13 @@ function Signup() {
         />
         <form>
           <div className="txt_field">
-            <input type="text" value={email} onChange={e => setemail(e.target.value)} />
+            <input type="text" required value={email} onChange={e => setemail(e.target.value)} />
             <span></span>
             <label>E-mail</label>
           </div>
           <div className="txt_field">
             <input
-              type="password"
+              type="password" required
               value={password}
               onChange={e => setpassword(e.target.value)}
             />

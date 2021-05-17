@@ -1,14 +1,14 @@
-.checkoutProduct {
+.basketcar{
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.checkoutProduct__info {
+.basketcar_info {
   padding-left: 20px;
 }
 
-.checkoutProduct__info > button {
+.basketcar_info > button {
   background: #e48b38;
   border-radius: 25px;
   border: 1px solid;
@@ -17,13 +17,13 @@
   color: whitesmoke;
 }
 
-.checkoutProduct__image {
+.basketcar_image {
   object-fit: contain;
   width: 180px;
   height: 180px;
 }
 
-.checkoutProduct__title {
+.basketcar_title {
   font-size: 17px;
   font-weight: 800;
 }

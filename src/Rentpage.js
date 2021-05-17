@@ -33,7 +33,7 @@ function CarCard({ model, image, description, price, city, type }) {
   const classes = useStyles();
   const [{ user, basket }, dispatch] = useStateValue();
   
-  const handleAuthenticaton = () => {
+  const handleAuthentication = () => {
     if (user) {
       dispatch({
         type: "ADD_TO_BASKET",
@@ -47,7 +47,7 @@ function CarCard({ model, image, description, price, city, type }) {
         },
       });
    
-      alert("Lütfen Ödemeyi Yapınız \n IBAN")
+      
     }
     else {
       alert("You must sign in first!");
@@ -75,7 +75,7 @@ function CarCard({ model, image, description, price, city, type }) {
         </CardActionArea>
         <Grid container justify="center" alignItems="flex-end">
           <CardActions>
-            <Button onClick={handleAuthenticaton} size="small" color="primary">
+            <Button onClick={handleAuthentication} size="small" color="primary">
               Add to Basket
             </Button>
             <Typography
